@@ -85,5 +85,6 @@ def send_btc():
     print(data)
     return flask.jsonify({"ok": ok, "data":tx_hash})
 
-
-app.run(host="0.0.0.0", port="4343", debug=True)
+import os
+if os.name == "nt":
+    app.run(host="0.0.0.0", port="4343", debug=True)
