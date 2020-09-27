@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Bitcoin Wallet</title>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            background-color: #494947;
+        }
+
+        .container {
+            display: flex;
+            flex: 4;
+            width: 40vw;
+            flex-direction: column;
+            background-color: #7C7C79;
+            border-radius: 10px;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .parent {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            flex: 1;
+            font-weight: 700;
+            font-size: xx-large;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 1vh;
+        }
+
+        .footer {
+            flex: 1;
+        }
+
+        .input-group {
+            width: 65%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            font-size: large;
+            color: white;
+        }
+
+        input[type=text] {
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            border: none;
+
+            width: 200px;
+            height: 30px;
+            padding-left: 10px;
+        }
+
+        input[type=text]:focus {
+            outline: none;
+            border: 2px solid #494947;
+
+        }
+
+        input[type=password] {
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            border: none;
+            width: 200px;
+            height: 30px;
+            padding-left: 10px;
+        }
+
+        input[type=password]:focus {
+            outline: none;
+            border: 2px solid #494947;
+        }
+
+        .input-text {}
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="header">Sign up</div>
+
+        <div class="container">
+            <div class="input-group">
+                <label>Name</label>
+                <input type="text" id="name" class="input-text" />
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="text" id="email" class="input-text" />
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" class="input-text" />
+            </div>
+            <div class="input-group">
+                <label>Re-enter Password</label>
+                <input type="password" id="reenter-password" class="input-text" />
+            </div>
+            <button id="signup-button">Sign up</button>
+        </div>
+        <div class="footer">
+
+        </div>
+    </div>
+    <script>
+
+        document.getElementById("signup-button").addEventListener("click", () => {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let rPassword = document.getElementById("reenter-password").value;
+
+            if (password !== rPassword) {
+                alert("Password and Re-entered password do not match")
+                document.getElementById("password").value = ""
+                document.getElementById("reenter-password").value = ""
+                return
+            }
+            postData("register-user",
+                { name: name, email: email, password: password, rPassword: rPassword })
+                .then(data => {
+                    console.log(data)
+                    if (data.ok) {
+                        alert("Registeration successful")
+                        window.location.href = "login"
+                    }
+                })
+            console.log(name, email, password, rPassword)
+        })
+
+        async function postData(url = '', data = {}) {
+            // Default options are marked with *
+            const response = await fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: JSON.stringify(data) // body data type must match "Content-Type" header
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        }
+    </script>
+</body>
+
+</html>

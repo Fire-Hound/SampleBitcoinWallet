@@ -1,0 +1,5 @@
+Transaction sent
+
+TxID: 0004bd2d24c77f145ff539d48a359f651c2ce501ff1b4b3442f7882309597a9a
+Address: mzSPDNVcyJv67eutNLHLPGtNTLscw8qjdF
+Amount: 0.001
