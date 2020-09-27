@@ -125,6 +125,8 @@
                 console.log(data)
                 if(data.ok) {
                     window.location.href = "wallet"
+                } else {
+                    alert("Invalid Credentials")
                 }
             })
             console.log(email, password)

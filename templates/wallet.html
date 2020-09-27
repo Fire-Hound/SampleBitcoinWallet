@@ -141,6 +141,7 @@
 </head>
 
 <body>
+    <a id="logout" href="#" style="float: right; padding: 10px;">Logout</a>
     <div class="parent" id="parent">
         <div class="header">Wallet</div>
 
@@ -231,10 +232,18 @@
             })
         }
 
+        document.getElementById("logout").addEventListener("click", ()=>{
+            postData("logout")
+            .then(()=>{
+                window.location.href = "login"
+            })
+        })
         postData("user",
             {})
             .then(data => {
-                console.log(data.data.name)
+                if(data.data === null) {
+                    window.location.href = "/"
+                }            
                 document.getElementById("name").innerHTML = data.data.name
                 document.getElementById("address").innerHTML = data.data.address
                 document.getElementById("balance").innerHTML = data.data.balance

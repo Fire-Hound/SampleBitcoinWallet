@@ -54,6 +54,10 @@ def login_user():
     print(data)
     return flask.jsonify({"ok": ok})
 
+@app.route("/logout", methods=["POST"])
+def logout():
+    flask.session.pop('user', None)
+    return flask.jsonify({"ok": True})
 
 @app.route("/user", methods=["POST"])
 def user():
