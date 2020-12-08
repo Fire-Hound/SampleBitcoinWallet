@@ -12,11 +12,12 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Updating PIP
-        run: pip install -U pip setuptools
+        run: pip3 install --upgrade setuptools
 
       - name: Install packages
         run: pip3 install -r requirements.txt
 
       - name: run_server.py
         run: |
-          python3 server.py
+          python3 server.py &
+          sleep 5
