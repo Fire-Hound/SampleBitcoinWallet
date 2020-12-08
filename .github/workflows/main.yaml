@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Updating PIP
+        run: pip install -U pip setuptools
+
       - name: Install packages
         run: pip3 install -r requirements.txt
 
