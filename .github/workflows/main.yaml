@@ -1,0 +1,19 @@
+name: BitCoinCI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install packages
+        run: pip3 install -r requirements.txt
+
+      - name: run_server.py
+        run: |
+          python3 server.py

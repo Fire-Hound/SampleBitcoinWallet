@@ -1,3 +1,4 @@
+import os
 import flask
 import sqlite3
 import util
@@ -54,10 +55,12 @@ def login_user():
     print(data)
     return flask.jsonify({"ok": ok})
 
+
 @app.route("/logout", methods=["POST"])
 def logout():
     flask.session.pop('user', None)
     return flask.jsonify({"ok": True})
+
 
 @app.route("/user", methods=["POST"])
 def user():
@@ -87,8 +90,8 @@ def send_btc():
         print(e)
         ok = False
     print(data)
-    return flask.jsonify({"ok": ok, "data":tx_hash})
+    return flask.jsonify({"ok": ok, "data": tx_hash})
 
-import os
+
 if os.name == "nt":
     app.run(host="0.0.0.0", port="4343", debug=True)
